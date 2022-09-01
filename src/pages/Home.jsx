@@ -4,7 +4,7 @@ import PizzaBlock from '../components/PizzaBlock';
 import { useEffect, useState } from 'react';
 import PizzaSkeleton from '../components/PizzaBlock/PizzaSkeleton'
 
-const Home = () => {
+const Home = ({searchValue}) => {
 	const [items, setItems] = useState([])
   const [isLoadingPizzas, setIsLoadingPizzas] = useState(true)
 	const [categoryId, setCategoryId] = useState(0)
@@ -15,9 +15,12 @@ const Home = () => {
 
   useEffect(() => {
 		setIsLoadingPizzas(true)
+
+		const category = categoryId > 0 ? `category=${categoryId}` : ''
+		const search = searchValue ? `&search=${searchValue}` : ''
+
     fetch(`https://630b7052f280658a59db7646.mockapi.io/pizzas?
-			${categoryId > 0 ? `category=${categoryId}` : ''}
-			&sortBy=${sortType.sortProperty}&order=desc	
+			${category}${search}&sortBy=${sortType.sortProperty}&order=desc	
 		`)
       .then(res => res.json())
       .then(arr => {
@@ -26,7 +29,7 @@ const Home = () => {
       })
 		
 		window.scrollTo(0, 0)
-  }, [categoryId, sortType]);
+  }, [categoryId, sortType, searchValue]);
 
 	return (
 		<div className='container'>
