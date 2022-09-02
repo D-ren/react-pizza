@@ -1,0 +1,28 @@
+@import '../../scss/variables';
+
+.root {
+	li {
+		display: inline-block;
+
+		a {
+			display: inline-block;
+			text-align: center;
+			width: 45px;
+			line-height: 42px;
+			height: 45px;
+			border: 1px solid $orange;
+			border-radius: 30px;
+			margin-right: 10px;
+			cursor: pointer;
+		}
+	}
+
+	:global {
+		.selected {
+			a {
+				background-color: $orange;
+				color: #fff;
+			}
+		}
+	}
+}
