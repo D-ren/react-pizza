@@ -13,13 +13,10 @@ const Home = () => {
 	const {searchValue} = useContext(SearchContext)
 	const [items, setItems] = useState([])
   const [isLoadingPizzas, setIsLoadingPizzas] = useState(true)
-	const [sortType, setSortType] = useState({
-		name: 'популярности',
-		sortProperty: 'rating'
-	})
 	const [currentPage, setCurrentPage] = useState(1)
 
-	const categoryId = useSelector(state => state.filter.categoryId)
+	const {categoryId, sort} = useSelector(state => state.filter)
+	const sortType = sort.sortProperty
 	const dispatch = useDispatch()
 
 	const onChangeCategory = (id) => {
@@ -33,7 +30,7 @@ const Home = () => {
 		const search = searchValue ? `&search=${searchValue}` : ''
 
     fetch(`https://630b7052f280658a59db7646.mockapi.io/pizzas?page=${currentPage}&limit=4&
-			${category}${search}&sortBy=${sortType.sortProperty}&order=desc	
+			${category}${search}&sortBy=${sortType}&order=desc	
 		`)
       .then(res => res.json())
       .then(arr => {
@@ -46,7 +43,7 @@ const Home = () => {
 		<div className='container'>
 			<div className="content__top">
 				<Categories value={categoryId} onChangeCategory={onChangeCategory}/>
-				<Sort value={sortType} onChangeSort={(id) => setSortType(id)}/>
+				<Sort />
 			</div>
 			<h2 className="content__title">Все пиццы</h2>
 			<div className="content__items">
