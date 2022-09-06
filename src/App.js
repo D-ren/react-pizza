@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react';
+import React, { createContext, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
 import Cart from './pages/Cart';
@@ -14,16 +14,18 @@ function App() {
 
   return (
     <div className="wrapper">
-      <SearchContext.Provider value={{searchValue, setSearchValue}}>
-        <Header/>
-        <div className="content">
-          <Routes>
-            <Route path='/' element={<Home/>}/>
-            <Route path='/cart' element={<Cart />}/>
-            <Route path='/*' element={<NotFound />}/>
-          </Routes>
-        </div>
-      </SearchContext.Provider>
+      <React.StrictMode>
+        <SearchContext.Provider value={{searchValue, setSearchValue}}>
+          <Header/>
+          <div className="content">
+            <Routes>
+              <Route path='/' element={<Home/>}/>
+              <Route path='/cart' element={<Cart />}/>
+              <Route path='/*' element={<NotFound />}/>
+            </Routes>
+          </div>
+        </SearchContext.Provider>
+      </React.StrictMode>
     </div>
   );
 }
