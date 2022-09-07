@@ -7,21 +7,25 @@ import PizzaSkeleton from '../components/PizzaBlock/PizzaSkeleton'
 import Pagination from '../components/Pagination';
 import { SearchContext } from '../App';
 import { useDispatch, useSelector } from 'react-redux';
-import { setCategoryId } from '../redux/slices/filterSlice';
+import { setCategoryId, setCurrentPage } from '../redux/slices/filterSlice';
 import axios from 'axios';
 
 const Home = () => {
 	const {searchValue} = useContext(SearchContext)
 	const [items, setItems] = useState([])
   const [isLoadingPizzas, setIsLoadingPizzas] = useState(true)
-	const [currentPage, setCurrentPage] = useState(1)
 
-	const {categoryId, sort} = useSelector(state => state.filter)
+	
+	const {categoryId, sort, currentPage} = useSelector(state => state.filter)
 	const sortType = sort.sortProperty
 	const dispatch = useDispatch()
 
 	const onChangeCategory = (id) => {
 		dispatch(setCategoryId(id))
+	}
+
+	const onPageChange = number => {
+		dispatch(setCurrentPage(number))
 	}
 
   useEffect(() => {
@@ -52,7 +56,7 @@ const Home = () => {
 					: items.map(obj => <PizzaBlock key={obj.id} {...obj} />)
 				}
 			</div>
-			<Pagination onPageChange={num => setCurrentPage(num)}/>
+			<Pagination currentPage={currentPage} onPageChange={onPageChange}/>
 		</div>
 	)
 }
