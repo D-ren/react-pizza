@@ -9,13 +9,15 @@ import './scss/app.scss';
 
 function App() {  
   return (
-    <Routes>
-      <Route path='/' element={<HeaderLayout />}>
-        <Route path='' element={<Home/>}/>
-        <Route path='cart' element={<Cart />}/>
-        <Route path='*' element={<NotFound />}/>
-      </Route>
-    </Routes>
+    <React.StrictMode>
+      <Routes>
+        <Route path='/' element={<HeaderLayout />}>
+          <Route path='' element={<Home/>}/>
+          <Route path='cart' element={<Cart />}/>
+          <Route path='*' element={<NotFound />}/>
+        </Route>
+      </Routes>
+    </React.StrictMode>
   );
 }
 

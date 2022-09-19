@@ -5,12 +5,10 @@ import Header from '../components/Header'
 const HeaderLayout = () => {
 	return (
 		<div className="wrapper">
-		<React.StrictMode>
-				<Header/>
-					<div className="content">
-						<Outlet />
-					</div>
-      </React.StrictMode>
+			<Header/>
+			<div className="content">
+				<Outlet />
+			</div>
     </div>
 	)
 }
