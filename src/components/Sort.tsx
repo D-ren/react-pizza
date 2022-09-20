@@ -1,27 +1,32 @@
-import { useEffect, useRef, useState } from 'react'
+import { FC, useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setSort } from '../redux/slices/filterSlice'
 
-const list = [
+type List = {
+  name: string,
+  sortProperty: string,
+}
+
+const list: List[] = [
   {name: 'популярности', sortProperty: 'rating'}, 
   {name: 'цене', sortProperty: 'price'}, 
   {name: 'алфавиту', sortProperty: 'title'}
 ]
 
-export default function Sort() {
+const Sort: FC = () => {
   const [isVisiblePopup, setIsVisiblePopup] = useState(false)
 
-  const sort = useSelector(state => state.filter.sort)
+  const sort = useSelector((state: any) => state.filter.sort)
   const dispatch = useDispatch()
-  const sortRef = useRef()
+  const sortRef = useRef<HTMLDivElement>(null)
 
-  const onClickSortList = (obj) => {
+  const onClickSortList = (obj: List) => {
     dispatch(setSort(obj));
     setIsVisiblePopup(false)
   }
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
+    const handleClickOutside = (event: any) => {
       if(!event.path.includes(sortRef.current)) {
         setIsVisiblePopup(false)
       }
@@ -71,3 +76,5 @@ export default function Sort() {
     </div>
   )
 }
+
+export default Sort
