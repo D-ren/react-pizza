@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react';
+import { FC, useCallback, useEffect } from 'react';
 import Categories from '../components/Categories'
 import Sort from '../components/Sort'
 import PizzaBlock from '../components/PizzaBlock';
@@ -15,9 +15,9 @@ const Home: FC = () => {
 	const sortType = sort.sortProperty
 	const dispatch = useAppDispatch()
 
-	const onChangeCategory = (id: number) => {
+	const onChangeCategory = useCallback((id: number) => {
 		dispatch(setCategoryId(id))
-	}
+	}, [])
 
 	const onPageChange = (page: number) => {
 		dispatch(setCurrentPage(page))
@@ -41,7 +41,7 @@ const Home: FC = () => {
 		<div className='container'>
 			<div className="content__top">
 				<Categories value={categoryId} onChangeCategory={onChangeCategory}/>
-				<Sort />
+				<Sort value={sort} />
 			</div>
 			<h2 className="content__title">Все пиццы</h2>
 				{
