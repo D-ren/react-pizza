@@ -4,10 +4,11 @@ import CartItem from '../components/cartItem'
 import { clearItems } from '../redux/slices/cartSlice'
 import CartEmpty from '../components/cartEmpty'
 import { FC } from 'react'
+import { RootState } from '../redux/store'
 
 const Cart: FC = () => {
 	const dispatch = useDispatch()
-	const {totalPrice, items} = useSelector((state: any) => state.cart)
+	const {totalPrice, items} = useSelector((state: RootState) => state.cart)
 
 	const totalCount = items.reduce((sum: number, item: any) => sum + item.count, 0)
 
