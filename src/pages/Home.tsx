@@ -5,9 +5,9 @@ import PizzaBlock from '../components/PizzaBlock';
 import PizzaSkeleton from '../components/PizzaBlock/PizzaSkeleton'
 import Pagination from '../components/Pagination';
 import { useSelector } from 'react-redux';
-import { setCategoryId, setCurrentPage } from '../redux/slices/filterSlice';
-import { fetchPizzas } from '../redux/slices/pizzaSlice';
 import { RootState, useAppDispatch } from '../redux/store';
+import { fetchPizzas } from '../redux/pizaa/asyncActions';
+import { setCategoryId, setCurrentPage } from '../redux/filter/slice';
 
 const Home: FC = () => {
 	const {items, status} = useSelector((state: RootState) => state.pizza)

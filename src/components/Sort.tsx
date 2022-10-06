@@ -1,12 +1,14 @@
 import { FC, memo, useEffect, useRef, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { setSort, Sort, Sort as SortType } from '../redux/slices/filterSlice'
+import { setSort } from '../redux/filter/slice'
+import { Sort } from '../redux/filter/types'
+
 
 type SortPopupProps = {
   value: Sort
 }
 
-const list: SortType[] = [
+const list: Sort[] = [
   {name: 'популярности', sortProperty: 'rating'}, 
   {name: 'цене', sortProperty: 'price'}, 
   {name: 'алфавиту', sortProperty: 'title'}
@@ -18,7 +20,7 @@ const SortPopup: FC<SortPopupProps> = memo(({value}) => {
   const dispatch = useDispatch()
   const sortRef = useRef<HTMLDivElement>(null)
 
-  const onClickSortList = (obj: SortType) => {
+  const onClickSortList = (obj: Sort) => {
     dispatch(setSort(obj));
     setIsVisiblePopup(false)
   }
